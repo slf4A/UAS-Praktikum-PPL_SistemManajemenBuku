@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% block title %}{{ buku.judul }} — E-Perpus{% endblock %}
+
+{% block extra_css %}
+<style>
+  .detail-section { padding: 2.5rem 0; }
+  .detail-cover {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    object-fit: cover;
+    max-height: 380px;
+  }
+  .detail-cover-placeholder {
+    width: 100%;
+    min-height: 280px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, var(--c-primary-soft), #DBEAFE);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #93C5FD;
+    gap: .75rem;
+  }
+  .detail-cover-placeholder i { font-size: 4rem; }
+
+  .detail-meta { display: flex; flex-direction: column; gap: .5rem; }
+  .meta-row {
+    display: flex;
+    align-items: flex-start;
+    gap: .75rem;
+    font-size: .875rem;
+  }
+  .meta-row .meta-key {
+    width: 90px;
+    flex-shrink: 0;
+    color: var(--c-text-muted);
+    font-weight: 500;
+  }
+  .meta-row .meta-val { color: var(--c-text); font-weight: 500; }
+
+  .stok-box {
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    font-size: .9rem;
+  }
+  .stok-box.ok { background: #F0FDF4; border: 1px solid #BBF7D0; }
+  .stok-box.habis { background: #FFF1F2; border: 1px solid #FECDD3; }
+  .stok-box i { font-size: 1.3rem; }
+  .stok-box .stok-num { font-size: 1.25rem; font-weight: 700; }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="detail-section">
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <nav class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Katalog</a></li>
+        <li class="breadcrumb-item active">{{ buku.judul }}</li>
+      </ol>
+    </nav>
+
+    <!-- Error alert -->
+    {% if error %}
+    <div class="alert alert-danger d-flex align-items-center gap-2 mb-4">
+      <i class="bi bi-exclamation-circle-fill"></i>
+      <span>{{ error }}</span>
+    </div>
+    {% endif %}
+
+    <div class="row g-4 g-lg-5">
+
+      <!-- Cover -->
+      <div class="col-md-4 col-lg-3">
+        {% if buku.gambar %}
+          <img src="{{ buku.gambar.url }}" class="detail-cover" alt="{{ buku.judul }}">
+        {% else %}
+          <div class="detail-cover-placeholder">
+            <i class="bi bi-book"></i>
+            <span style="font-size:.75rem;font-weight:500">Sampul tidak tersedia</span>
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Info -->
+      <div class="col-md-8 col-lg-9">
+        <span class="badge-cat mb-3">{{ buku.kategori.nama }}</span>
+        <h1 style="font-size:1.625rem;font-weight:700;letter-spacing:-.4px;line-height:1.25;margin-bottom:.5rem">
+          {{ buku.judul }}
+        </h1>
+
+        <div class="detail-meta mt-3 mb-4">
+          <div class="meta-row">
+            <span class="meta-key">Penulis</span>
+            <span class="meta-val">{{ buku.penulis }}</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-key">Kategori</span>
+            <span class="meta-val">{{ buku.kategori.nama }}</span>
+          </div>
+        </div>
+
+        <!-- Stok Box -->
+        {% if buku.stok > 0 %}
+        <div class="stok-box ok mb-4">
+          <i class="bi bi-check-circle-fill" style="color:var(--c-success)"></i>
+          <div>
+            <div class="stok-num" style="color:var(--c-success)">{{ buku.stok }}</div>
+            <div style="font-size:.8rem;color:var(--c-text-muted)">buku tersedia untuk dipinjam</div>
+          </div>
+        </div>
+        {% else %}
+        <div class="stok-box habis mb-4">
+          <i class="bi bi-x-circle-fill" style="color:var(--c-danger)"></i>
+          <div>
+            <div class="stok-num" style="color:var(--c-danger)">Stok Habis</div>
+            <div style="font-size:.8rem;color:var(--c-text-muted)">Buku sedang tidak tersedia</div>
+          </div>
+        </div>
+        {% endif %}
+
+        <!-- Actions -->
+        <div class="d-flex flex-wrap gap-2">
+          {% if buku.stok > 0 %}
+            <a href="{% url 'reservasi_buku' buku.pk %}" class="btn btn-success px-4">
+              <i class="bi bi-bookmark-plus me-2"></i>Reservasi Sekarang
+            </a>
+          {% else %}
+            <button class="btn btn-secondary px-4" disabled>
+              <i class="bi bi-x-circle me-2"></i>Stok Habis
+            </button>
+          {% endif %}
+          <a href="{% url 'index' %}" class="btn btn-outline-secondary px-3">
+            <i class="bi bi-arrow-left me-1"></i>Kembali
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}

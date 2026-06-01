@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% block title %}Reservasi Berhasil — E-Perpus{% endblock %}
+
+{% block extra_css %}
+<style>
+  .sukses-section { padding: 3rem 0; }
+  .sukses-card {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: 2.5rem 2rem;
+    max-width: 520px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .sukses-icon {
+    width: 72px;
+    height: 72px;
+    background: #F0FDF4;
+    border: 2px solid #BBF7D0;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--c-success);
+    margin-bottom: 1.25rem;
+  }
+  .sukses-title {
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: var(--c-text);
+    letter-spacing: -.3px;
+    margin-bottom: .5rem;
+  }
+  .sukses-sub {
+    font-size: .9rem;
+    color: var(--c-text-muted);
+    line-height: 1.6;
+  }
+  .info-panel {
+    background: var(--c-primary-soft);
+    border: 1px solid #BFDBFE;
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    text-align: left;
+    font-size: .875rem;
+  }
+  .info-panel .info-title {
+    font-weight: 600;
+    color: var(--c-primary);
+    margin-bottom: .5rem;
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+  }
+  .info-panel ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: var(--c-text);
+    line-height: 1.8;
+  }
+  .buku-tag {
+    display: inline-block;
+    background: var(--c-primary-soft);
+    border: 1px solid #BFDBFE;
+    color: var(--c-primary);
+    border-radius: 20px;
+    padding: .3rem .9rem;
+    font-size: .8125rem;
+    font-weight: 600;
+    margin: .75rem 0 0;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="sukses-section">
+  <div class="container">
+    <div class="sukses-card">
+
+      <!-- Icon -->
+      <div class="sukses-icon">
+        <i class="bi bi-check-lg"></i>
+      </div>
+
+      <!-- Title -->
+      <h1 class="sukses-title">Reservasi Berhasil!</h1>
+      <p class="sukses-sub">
+        Terima kasih telah melakukan reservasi. Buku Anda sudah kami catat.
+      </p>
+
+      <!-- Buku tag -->
+      <div class="buku-tag">
+        <i class="bi bi-book me-1"></i>{{ buku.judul }}
+      </div>
+
+      <!-- Info steps -->
+      <div class="info-panel">
+        <div class="info-title">
+          <i class="bi bi-list-ol"></i> Langkah Selanjutnya
+        </div>
+        <ul>
+          <li>Datang ke perpustakaan pada jam operasional</li>
+          <li>Tunjukkan nama Anda kepada petugas</li>
+          <li>Ambil buku dan tandatangani buku peminjaman</li>
+          <li>Kembalikan buku sesuai tanggal yang ditentukan</li>
+        </ul>
+      </div>
+
+      <!-- Actions -->
+      <div class="d-flex justify-content-center gap-2">
+        <a href="{% url 'index' %}" class="btn btn-primary px-4">
+          <i class="bi bi-house me-2"></i>Kembali ke Katalog
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}

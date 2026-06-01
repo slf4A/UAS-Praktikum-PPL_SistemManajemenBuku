@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% block title %}Tentang — E-Perpus{% endblock %}
+{% block nav_tentang %}active{% endblock %}
+
+{% block extra_css %}
+<style>
+  .about-section { padding: 2.5rem 0; }
+  .about-card {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-sm);
+  }
+  .about-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -.4px;
+    margin-bottom: .5rem;
+  }
+  .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+  .feature-item {
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.125rem;
+    display: flex;
+    align-items: flex-start;
+    gap: .75rem;
+  }
+  .feature-item i {
+    font-size: 1.25rem;
+    color: var(--c-primary);
+    flex-shrink: 0;
+    margin-top: .1rem;
+  }
+  .feature-item span { font-size: .875rem; font-weight: 500; color: var(--c-text); line-height: 1.4; }
+
+  .tech-stack { display: flex; flex-wrap: wrap; gap: .625rem; margin-top: 1rem; }
+  .tech-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: 20px;
+    padding: .35rem .875rem;
+    font-size: .8125rem;
+    font-weight: 500;
+    color: var(--c-text);
+  }
+  .tech-badge i { color: var(--c-primary); }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="about-section">
+  <div class="container" style="max-width:760px">
+
+    <!-- Breadcrumb -->
+    <nav class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Beranda</a></li>
+        <li class="breadcrumb-item active">Tentang</li>
+      </ol>
+    </nav>
+
+    <div class="about-card">
+
+      <!-- Header -->
+      <div style="display:flex;align-items:center;gap:.875rem;margin-bottom:1.5rem">
+        <div style="width:52px;height:52px;background:var(--c-primary);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.5rem;flex-shrink:0">
+          <i class="bi bi-book-half"></i>
+        </div>
+        <div>
+          <h1 class="about-title">E-Perpus</h1>
+          <p style="margin:0;font-size:.875rem;color:var(--c-text-muted)">Sistem Inventaris &amp; Reservasi Buku Berbasis Web</p>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- Deskripsi -->
+      <p style="color:var(--c-text-muted);font-size:.9375rem;line-height:1.75;margin-top:1.25rem">
+        <strong style="color:var(--c-text)">E-Perpus</strong> dirancang untuk memudahkan pengelolaan perpustakaan secara digital. Pengguna dapat mencari buku, melihat ketersediaan, dan melakukan reservasi langsung dari browser — tanpa perlu login.
+      </p>
+
+      <!-- Fitur -->
+      <div class="section-label mt-2">Fitur Utama</div>
+      <div class="feature-grid">
+        <div class="feature-item"><i class="bi bi-search"></i><span>Cari buku berdasarkan judul</span></div>
+        <div class="feature-item"><i class="bi bi-eye"></i><span>Lihat detail dan ketersediaan buku</span></div>
+        <div class="feature-item"><i class="bi bi-bookmark-plus"></i><span>Reservasi buku secara online</span></div>
+        <div class="feature-item"><i class="bi bi-grid-3x3-gap"></i><span>Katalog terorganisir per kategori</span></div>
+        <div class="feature-item"><i class="bi bi-shield-lock"></i><span>Panel admin untuk pengelolaan</span></div>
+        <div class="feature-item"><i class="bi bi-phone"></i><span>Tampilan responsif di semua perangkat</span></div>
+      </div>
+
+      <!-- Tech stack -->
+      <div class="section-label mt-4">Teknologi</div>
+      <div class="tech-stack">
+        <span class="tech-badge"><i class="bi bi-code-slash"></i> Python Django</span>
+        <span class="tech-badge"><i class="bi bi-bootstrap"></i> Bootstrap 5</span>
+        <span class="tech-badge"><i class="bi bi-database"></i> SQLite</span>
+        <span class="tech-badge"><i class="bi bi-filetype-html"></i> HTML &amp; CSS</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}
