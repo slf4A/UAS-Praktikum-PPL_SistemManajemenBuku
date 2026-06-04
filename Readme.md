@@ -125,6 +125,6 @@ E-Perpus/
 
 **Sifa Jema (2308107010080)**
 
-Project dibuat sebagai tugas pengembangan aplikasi web menggunakan Django Framework. Dan Project ini dibuat untuk keperluan Ujian Akhir Semester pada Praktikum Proyek Perangkat Lunak B. 
+Project dibuat sebagai tugas pengembangan aplikasi web menggunakan Django Framework. Dan Project ini dibuat untuk keperluan Ujian Akhir Semester. 
 
 ---
