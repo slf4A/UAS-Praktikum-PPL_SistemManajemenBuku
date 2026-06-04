@@ -43,8 +43,8 @@ Aplikasi manajemen perpustakaan digital berbasis web yang dibangun menggunakan *
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/USERNAME_KAMU/NAMA_REPOSITORY.git
-cd NAMA_REPOSITORY
+git clone (https://github.com/slf4A/UAS_SistemManajemenBuku.git)
+cd (https://github.com/slf4A/UAS_SistemManajemenBuku.git)
 ```
 
 ### 2. Membuat Virtual Environment
