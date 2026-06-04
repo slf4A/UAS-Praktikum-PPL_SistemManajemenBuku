@@ -5,18 +5,18 @@
 {% block extra_css %}
 <style>
   .hero {
-    background: linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%);
+    background: linear-gradient(135deg,#96C1C5,#7FB2B8);
     padding: 3.5rem 0 3rem;
   }
   .hero h1 {
     font-size: 2rem;
     font-weight: 700;
-    color: #fff;
+    color:#44312f;
     letter-spacing: -.5px;
     line-height: 1.25;
   }
   .hero p {
-    color: rgba(255,255,255,.75);
+    color:#44312f;
     font-size: .9375rem;
     margin-top: .5rem;
     margin-bottom: 1.75rem;
@@ -42,10 +42,29 @@
 
   .catalog-section { padding: 2.5rem 0; }
 
-  /* Book card hover lift */
+  
   .book-card { cursor: default; }
   .book-card:hover { transform: translateY(-3px); }
   .book-card .card-body .btn { font-size: .8125rem; padding: .4rem .9rem; }
+
+  .category-btn {
+    border: 1px solid #694A47;
+    background-color: #FFF0DE;
+    color: #694A47;
+  }
+
+  .category-btn:hover {
+    background-color: #694A47;
+    color: white;
+  }
+
+  .category-btn.active {
+    background-color: #694A47;
+    border-color: #694A47;
+    color: white;
+    box-shadow: 0 4px 12px rgba(105,74,71,.25);
+  }
+
 </style>
 {% endblock %}
 
@@ -56,19 +75,40 @@
   <div class="container">
     <h1>Katalog Perpustakaan</h1>
     <p>Temukan buku yang kamu butuhkan dan reservasi sebelum datang ke perpustakaan.</p>
-    <form method="GET" action="" class="hero-search">
-      <div class="search-wrap">
-        <span class="search-icon"><i class="bi bi-search"></i></span>
-        <input
-          name="q"
-          type="search"
-          placeholder="Cari judul buku..."
-          value="{{ request.GET.q }}"
-          autocomplete="off"
-        />
-        <button type="submit" class="btn btn-primary">Cari</button>
+    <form method="GET" class="mb-4">
+      <div style="display:flex; gap:10px;">
+          <input
+              type="text"
+              name="q"
+              value="{{ query }}"
+              placeholder="Cari buku..."
+              class="form-control"
+          >
+
+          {% if kategori_aktif %}
+          <input type="hidden" name="kategori" value="{{ kategori_aktif }}">
+          {% endif %}
+
+          <button type="submit" class="btn btn-primary">
+              Cari
+          </button>
       </div>
     </form>
+
+    <div class="mb-4">
+      <a href="{% url 'index' %}"
+        class="btn btn-sm category-btn {% if not kategori_aktif %}active{% endif %}">
+          Semua
+      </a>
+
+      {% for kategori in kategori_list %}
+        <a href="?kategori={{ kategori.id }}"
+          class="btn btn-sm category-btn {% if kategori_aktif == kategori.id|stringformat:'s' %}active{% endif %}">
+          {{ kategori.nama }}
+        </a>
+        {% endfor %}
+    </div>
+
   </div>
 </section>
 

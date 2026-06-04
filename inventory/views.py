@@ -1,15 +1,29 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Buku, Reservasi
+from .models import Buku, Reservasi, Kategori
 from .forms import ReservasiForm
 
 
 def index(request):
     query = request.GET.get('q', '')
+    kategori_id = request.GET.get('kategori', '')
+
+    buku_list = Buku.objects.all()
+    kategori_list = Kategori.objects.all()
+
+    if kategori_id:
+        buku_list = buku_list.filter(kategori_id=kategori_id)
+
     if query:
-        buku_list = Buku.objects.filter(judul__icontains=query)
-    else:
-        buku_list = Buku.objects.all()
-    return render(request, 'index.html', {'buku_list': buku_list})
+        buku_list = buku_list.filter(judul__icontains=query)
+
+    context = {
+        'buku_list': buku_list,
+        'kategori_list': kategori_list,
+        'query': query,
+        'kategori_aktif': kategori_id,
+    }
+
+    return render(request, 'index.html', context)
 
 
 def detail_buku(request, pk):
@@ -35,3 +49,5 @@ def proses_reservasi(request, pk):
 
 def tentang(request):
     return render(request, 'about.html')
+
+
